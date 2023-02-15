@@ -44,3 +44,6 @@ npm run build
 ```sh
 npm run lint
 ```
+# Concept:
+- First render a button (must focus on animation when hover, click, and sound); when button is clicked, loading a while then render a list of card  
+- When card is clicked (must focus on UI like button), show modal with information detail.
