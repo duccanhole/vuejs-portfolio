@@ -24,3 +24,9 @@
     </div>
   </div>
 </template>
+<script lang="ts" setup>
+const props = defineProps({
+  propA: String,
+});
+console.log(props.propA);
+</script>
