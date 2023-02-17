@@ -1,15 +1,17 @@
 <template>
   <button
-    class="rounded-full p-3 bg-gray-300 text-lg font-bold font-caveat hover:bg-gradient-to-br hover:from-gray-300 hover:via-lime-300 hover:to-green-300 hover:shadow-xl transition ui-btn"
+    class="rounded-full p-3 bg-gray-300 text-lg font-bold font-caveat hover:bg-gradient-to-br hover:from-gray-300 hover:via-lime-300 hover:to-green-300 shadow-xl transition"
     @click="onBtnClick"
   >
     Start
   </button>
 </template>
 <script lang="ts" setup>
+const emit = defineEmits(['e:click'])
 function onBtnClick() {
   const audio = new Audio("/sound-click.wav");
   audio.play();
+  emit('e:click', "asdasd")
 }
 </script>
 <style scoped>
