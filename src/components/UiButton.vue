@@ -1,47 +1,48 @@
 <template>
   <button
-    class="rounded-full p-3 bg-gray-300 text-lg font-bold font-caveat hover:bg-gradient-to-br hover:from-gray-300 hover:via-lime-300 hover:to-green-300 shadow-xl transition"
+    ref="uiBtn"
+    class="rounded-full p-3 text-yellow-300 border-2 border-dashed hover:border-dotted border-yellow-300 text-xl font-bold font-caveat relative"
+    style="width: 150px; height: 150px"
     @click="onBtnClick"
   >
-    Start
+    <div class="bg-yellow-300 absolute animate__bounceIn"></div>
+    <div>Start</div>
   </button>
 </template>
 <script lang="ts" setup>
-const emit = defineEmits(['e:click'])
-function onBtnClick() {
+import { ref } from "vue";
+import sleep from "../shared/sleep";
+
+const emit = defineEmits(["e:click"]);
+const uiBtn = ref<HTMLButtonElement | null>(null);
+async function onBtnClick() {
+  uiBtn.value?.classList.add("ui-btn");
   const audio = new Audio("/sound-click.wav");
   audio.play();
-  emit('e:click', "asdasd")
+  // emit("e:click", "asdasd");
+  await sleep(2000);
+  uiBtn.value?.classList.remove("ui-btn");
 }
 </script>
 <style scoped>
-.ui-btn:active {
-  animation: border-move 0.4s;
+.ui-btn > div:nth-child(1) {
+  border-style: dotted;
+  top: 0;
+  left: 50%;
+  transform: translate(-10px, -10px) rotate(45deg);
+  /* border-radius: 60px; */
+  width: 20px;
+  height: 20px;
 }
-@keyframes border-move {
-  0% {
-    border-top: 5px solid #15803d;
-    border-right: none;
-    border-bottom: none;
-    border-left: none;
-  }
+.ui-btn {
+  animation: dots-move 2s forwards;
+}
+@keyframes dots-move {
   25% {
-    border-top: 2px solid #22c55e;
-    border-right: 5px solid #15803d;
-    border-bottom: none;
-    border-left: none;
+    transform: rotate(-35deg);
   }
-  50% {
-    border-top: none;
-    border-right: 2px solid #22c55e;
-    border-bottom: 5px solid #15803d;
-    border-left: none;
-  }
-  100% {
-    border-top: none;
-    border-right: none;
-    border-bottom: 2px solid #22c55e;
-    border-left: 5px solid #15803d;
+  to {
+    transform: rotate(360deg);
   }
 }
 </style>
